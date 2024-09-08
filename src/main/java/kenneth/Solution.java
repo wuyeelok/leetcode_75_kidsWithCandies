@@ -1,9 +1,6 @@
 package kenneth;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Main class for defining the required function(s).
@@ -20,11 +17,17 @@ public class Solution {
 
         List<Boolean> checkResult = new ArrayList<>();
 
-        for (int i = 0; i < candies.length; i++) {
-            Set<Integer> maxCandiesIndex = getMaxCandiesIndex(candies, extraCandies, i);
+        // Find out the max value in the list
+        List<Integer> myCList = new ArrayList<>();
+        for (int candy : candies) {
+            myCList.add(candy);
+        }
+        int max = Collections.max(myCList);
 
-            // After looping, check if maxCandiesIndex equals to target index
-            if (maxCandiesIndex.contains(i)) {
+        // check if adding extraCandies greater than the max
+        for (int candy : candies) {
+
+            if (candy + extraCandies >= max) {
                 checkResult.add(true);
             } else {
                 checkResult.add(false);
@@ -36,35 +39,5 @@ public class Solution {
         return checkResult;
     }
 
-    private static Set<Integer> getMaxCandiesIndex(int[] candies, int extraCandies, int i) {
-        Set<Integer> maxCandiesIndexSet = new HashSet<>();
-
-        int maxCandies = 0;
-        int maxCandiesIndex;
-
-        for (int j = 0; j < candies.length; j++) {
-
-            int checkingCandies = candies[j];
-
-            if (i == j) {
-                // if checking one, add the extra candies
-                checkingCandies = checkingCandies + extraCandies;
-            }
-
-            if (checkingCandies > maxCandies) {
-                maxCandies = checkingCandies;
-                maxCandiesIndex = j;
-
-                // remove all set value and add the maxCandiesIndex
-                maxCandiesIndexSet = new HashSet<>();
-                maxCandiesIndexSet.add(maxCandiesIndex);
-            } else if (checkingCandies == maxCandies) {
-                // If equal case, also add the index in to Set
-                maxCandiesIndex = j;
-                maxCandiesIndexSet.add(maxCandiesIndex);
-            }
-        }
-        return maxCandiesIndexSet;
-    }
 
 }
