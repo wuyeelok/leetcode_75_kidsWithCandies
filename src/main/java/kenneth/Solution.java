@@ -1,7 +1,9 @@
 package kenneth;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Main class for defining the required function(s).
@@ -19,10 +21,10 @@ public class Solution {
         List<Boolean> checkResult = new ArrayList<>();
 
         for (int i = 0; i < candies.length; i++) {
-            int maxCandiesIndex = getMaxCandiesIndex(candies, extraCandies, i);
+            Set<Integer> maxCandiesIndex = getMaxCandiesIndex(candies, extraCandies, i);
 
             // After looping, check if maxCandiesIndex equals to target index
-            if (i == maxCandiesIndex) {
+            if (maxCandiesIndex.contains(i)) {
                 checkResult.add(true);
             } else {
                 checkResult.add(false);
@@ -34,9 +36,11 @@ public class Solution {
         return checkResult;
     }
 
-    private static int getMaxCandiesIndex(int[] candies, int extraCandies, int i) {
+    private static Set<Integer> getMaxCandiesIndex(int[] candies, int extraCandies, int i) {
+        Set<Integer> maxCandiesIndexSet = new HashSet<>();
+
         int maxCandies = 0;
-        int maxCandiesIndex = 0;
+        int maxCandiesIndex;
 
         for (int j = 0; j < candies.length; j++) {
 
@@ -50,9 +54,17 @@ public class Solution {
             if (checkingCandies > maxCandies) {
                 maxCandies = checkingCandies;
                 maxCandiesIndex = j;
+
+                // remove all set value and add the maxCandiesIndex
+                maxCandiesIndexSet = new HashSet<>();
+                maxCandiesIndexSet.add(maxCandiesIndex);
+            } else if (checkingCandies == maxCandies) {
+                // If equal case, also add the index in to Set
+                maxCandiesIndex = j;
+                maxCandiesIndexSet.add(maxCandiesIndex);
             }
         }
-        return maxCandiesIndex;
+        return maxCandiesIndexSet;
     }
 
 }

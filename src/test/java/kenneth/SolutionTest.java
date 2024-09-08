@@ -95,4 +95,25 @@ class SolutionTest {
 
         assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    void example4() {
+        candyList.add(2);
+        candyList.add(8);
+        candyList.add(7);
+
+        extraCandies = 1;
+
+        int[] candies = candyList.stream().mapToInt(i -> i).toArray();
+
+        List<Boolean> expectedResult = new ArrayList<>();
+
+        expectedResult.add(false);
+        expectedResult.add(true);
+        expectedResult.add(true);
+
+        List<Boolean> actualResult = solution.kidsWithCandies(candies, extraCandies);
+
+        assertEquals(expectedResult, actualResult);
+    }
 }
