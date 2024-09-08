@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>kenneth</groupId>
-  <artifactId>CodingTestPlaygroundTemplate</artifactId>
+  <artifactId>kidsWithCandies</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>CodingTestPlaygroundTemplate</name>
+  <name>kidsWithCandies</name>
   <url>http://maven.apache.org</url>
 
   <properties>
